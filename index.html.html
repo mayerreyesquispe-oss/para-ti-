@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña linda</title>
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: #fce4ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Contenedor de la carta */
+        .card-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.6s;
+        }
+
+        .card {
+            width: 300px;
+            height: 200px;
+            background-color: #ff80ab;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        /* El mensaje oculto */
+        .message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: all 0.8s ease;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        /* Animación al hacer click */
+        .card-container.open .message {
+            transform: translateY(-130px);
+            opacity: 1;
+        }
+
+        .card-container.open .card {
+            transform: translateY(50px);
+        }
+
+        h2 { color: #d81b60; margin-bottom: 10px; }
+        p { color: #555; line-height: 1.5; }
+        .heart { color: #e91e63; font-size: 2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" onclick="toggleCard()">
+        <div class="message" id="msg">
+            <h2>¡Hola, mi amor! ❤️</h2>
+            <p>Eres una persona increible . Agradesco haberte conocido y haber pasado ya csai 3 años juntos .</p>
+            <p>Te amo mucho muchisimooooo .</p>
+            <p><strong > "BLANCA❤️"</p></strong>
+        </div>
+        <div class="card">
+            Haz click aquí ✨
+        </div>
+    </div>
+
+    <script>
+        function toggleCard() {
+            document.querySelector('.card-container').classList.toggle('open');
+            // Crear corazones flotantes al abrir
+            if(document.querySelector('.card-container').classList.contains('open')) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            for(let i=0; i<15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.transition = 'all 3s linear';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+                    heart.style.opacity = '0';
+                }, 100);
+
+                setTimeout(() => heart.remove(), 3100);
+            }
+        }
+    </script>
+</body>
+</html>
